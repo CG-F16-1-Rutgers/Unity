@@ -15,7 +15,7 @@ public class moveSpheres : MonoBehaviour {
 
 
 	void Update () {
-		distance += deltaX;
+		distance += Mathf.Abs( rb.velocity.magnitude * Time.deltaTime);
 		rb.AddForce (new Vector3 (direction*25, 0, 0));
 		if (distance >= 10) {
 			distance = 0;

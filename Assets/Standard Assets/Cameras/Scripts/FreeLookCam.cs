@@ -39,6 +39,12 @@ namespace UnityStandardAssets.Cameras
 
 	        m_PivotTargetRot = m_Pivot.transform.localRotation;
 			m_TransformTargetRot = transform.localRotation;
+
+			Vector3 initialCameraTranslation = new Vector3(0, 10, 0);
+			Vector3 initialCameraRotation = new Vector3(0, 90, 0);
+
+			transform.Translate (initialCameraTranslation);
+			//m_Pivot.localRotation = Quaternion.Euler(initialCameraRotation);
         }
 
 
@@ -74,10 +80,10 @@ namespace UnityStandardAssets.Cameras
 			return;
 
             // Read the user input
-			float x=0;
-			float y=0;
+			float x = 0;
+			float y = 0;
 			float v = 0;
-			if (Input.GetMouseButton (0)) {
+			if (Input.GetMouseButton (2)) {
 				x = CrossPlatformInputManager.GetAxis ("Mouse X");
 				y = 0.5f * CrossPlatformInputManager.GetAxis ("Mouse Y");
 				v = -CrossPlatformInputManager.GetAxis ("Mouse Y");
@@ -120,10 +126,8 @@ namespace UnityStandardAssets.Cameras
 			}
 
 			float moveH = Input.GetAxis ("Horizontal");
-			float moveV = Input.GetAxis ("Vertical");
-			float moveY = -50*CrossPlatformInputManager.GetAxis("Mouse ScrollWheel");
-			Vector3 cameraTranslation = new Vector3(moveH, moveY, moveV);
-
+			float moveV = 15*CrossPlatformInputManager.GetAxis("Mouse ScrollWheel") + Input.GetAxis ("Vertical");;
+			Vector3 cameraTranslation = new Vector3(moveH, 0, moveV);
 			transform.Translate (cameraTranslation);
         }
     }
