@@ -24,7 +24,7 @@ public class Director : MonoBehaviour {
 				} else {
 					
 					if (hit.transform.GetComponent<NavMeshAgent> ().tag != "Nazgul") {
-						hit.transform.GetComponent<NavMeshAgent> ().gameObject.GetComponent<Renderer> ().material.color = Color.white;
+						hit.transform.GetComponent<NavMeshAgent> ().gameObject.GetComponent<Renderer> ().material.color = Color.yellow;
 					}
 					selectedUnits.Remove (hit.transform.GetComponent<NavMeshAgent> ().gameObject);
 				}
@@ -32,7 +32,7 @@ public class Director : MonoBehaviour {
 			if (hit.transform.tag == "Ground" && Input.GetMouseButtonDown (0)) {
 				for (int i = 0; i < selectedUnits.Count; i++) {
 					if (selectedUnits [i].GetComponent<NavMeshAgent> ().tag != "Nazgul") {
-						selectedUnits [i].GetComponent<Renderer> ().material.color = Color.white;
+						selectedUnits [i].GetComponent<Renderer> ().material.color = Color.yellow;
 					} else {
 						selectedUnits [i].GetComponent<Renderer> ().material.color = Color.black;
 					}
