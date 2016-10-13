@@ -29,6 +29,8 @@ namespace UnityStandardAssets.Cameras
 		private Quaternion m_PivotTargetRot;
 		private Quaternion m_TransformTargetRot;
 
+		private GameObject Target;
+
         protected override void Awake()
         {
             base.Awake();
@@ -47,9 +49,16 @@ namespace UnityStandardAssets.Cameras
 			//m_Pivot.localRotation = Quaternion.Euler(initialCameraRotation);
         }
 
+		protected void Start()
+		{
+			Target = GameObject.FindGameObjectWithTag ("Erika");
+		}
+
+
 
         protected void Update()
         {
+			ThirdPersonCamera ();
             HandleRotationMovement();
             if (m_LockCursor && Input.GetMouseButtonUp(0))
             {
@@ -64,6 +73,17 @@ namespace UnityStandardAssets.Cameras
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
+
+		void ThirdPersonCamera()
+		{
+			Vector3 pos;
+			transform.rotation = Target.transform.rotation;
+			pos = Target.transform.position;
+			pos += transform.up * 1.8f;
+			pos += transform.forward * -2.6f;
+			pos += transform.right * 0.2f;
+			transform.position = pos;
+		}
 
 
         protected override void FollowTarget(float deltaTime)
@@ -125,10 +145,11 @@ namespace UnityStandardAssets.Cameras
 				transform.localRotation = m_TransformTargetRot;
 			}
 
-			float moveH = Input.GetAxis ("Horizontal");
-			float moveV = 15*CrossPlatformInputManager.GetAxis("Mouse ScrollWheel") + Input.GetAxis ("Vertical");;
-			Vector3 cameraTranslation = new Vector3(moveH, 0, moveV);
-			transform.Translate (cameraTranslation);
+			//float moveH = Input.GetAxis ("Horizontal");
+			//float moveV = 15*CrossPlatformInputManager.GetAxis("Mouse ScrollWheel") + Input.GetAxis ("Vertical");
+			//float moveV = Input.GetAxis ("Vertical");
+			//Vector3 cameraTranslation = new Vector3(moveH, 0, moveV);
+			//transform.Translate (cameraTranslation);
         }
     }
 }
